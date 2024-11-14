@@ -1,0 +1,117 @@
+import React from "react";
+import { Link } from "react-router-dom";
+import { useCart } from "./CartContext";
+
+const Cart = () => {
+  const { cart, resetCart, removeFromCart, updateCartItemQuantity } = useCart();
+  const subtotal = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
+
+  // Función para incrementar la cantidad de un producto
+  const increaseQuantity = (itemId) => {
+    const item = cart.find((item) => item.id === itemId);
+    if (item) {
+      updateCartItemQuantity(itemId, item.quantity + 1);
+    }
+  };
+
+  // Función para disminuir la cantidad de un producto
+  const decreaseQuantity = (itemId) => {
+    const item = cart.find((item) => item.id === itemId);
+    if (item && item.quantity > 1) {
+      updateCartItemQuantity(itemId, item.quantity - 1);
+    }
+  };
+
+  return (
+    <div className="container mx-auto p-8 lg:flex lg:gap-10">
+      {/* Sección de Productos en el Carrito */}
+      <div className="lg:w-2/3 w-full bg-white p-6 rounded-lg shadow-md border border-gray-200">
+        <h2 className="text-3xl font-semibold mb-8 text-gray-800">Carro de Compras</h2>
+        {cart.length > 0 ? (
+          cart.map((item) => (
+            <div
+              key={item.id}
+              className="flex items-center mb-6 p-4 bg-gray-50 rounded-lg shadow-sm hover:shadow-lg transition-shadow"
+            >
+              <button
+                onClick={() => removeFromCart(item.id)}
+                className="text-gray-500 hover:text-red-600 mr-4 text-2xl"
+              >
+                &times;
+              </button>
+              <img
+                src={item.image}
+                alt={item.name}
+                className="w-24 h-24 object-cover rounded-lg shadow-sm border border-gray-200"
+              />
+              <div className="flex-1 ml-6">
+                <p className="text-lg font-medium text-gray-800">{item.name}</p>
+                {/* Formato para el precio individual */}
+                <p className="text-sm text-gray-500">
+                  {new Intl.NumberFormat("es-CO", { style: "currency", currency: "COP", minimumFractionDigits: 0 }).format(item.price)} 
+                </p>
+              </div>
+              <div className="flex items-center space-x-2">
+                <button
+                  onClick={() => decreaseQuantity(item.id)}
+                  className="w-8 h-8 flex items-center justify-center border border-gray-300 rounded-lg hover:bg-gray-100"
+                >
+                  -
+                </button>
+                <span className="text-lg font-medium text-gray-700">{item.quantity}</span>
+                <button
+                  onClick={() => increaseQuantity(item.id)}
+                  className="w-8 h-8 flex items-center justify-center border border-gray-300 rounded-lg hover:bg-gray-100"
+                >
+                  +
+                </button>
+              </div>
+              {/* Formato para el total de cada producto en el carrito */}
+              <div className="ml-6 font-semibold text-gray-800">
+                {new Intl.NumberFormat("es-CO", { style: "currency", currency: "COP", minimumFractionDigits: 0 }).format(item.price * item.quantity)}
+              </div>
+            </div>
+          ))
+        ) : (
+          <p className="text-gray-600 text-lg">Su carrito está vacío actualmente.</p>
+        )}
+        <div className="flex justify-between items-center mt-8">
+          <button
+            onClick={resetCart}
+            className="bg-red-600 text-white px-6 py-2 rounded-lg shadow hover:bg-red-700 transition-all"
+          >
+            Limpiar Carro
+          </button>
+        </div>
+      </div>
+
+      {/* Sección de Totales del Carrito */}
+      <div className="lg:w-1/3 w-full bg-gray-100 p-6 rounded-lg shadow-md mt-10 lg:mt-0 border border-gray-200">
+        <h2 className="text-3xl font-semibold mb-6 text-gray-800">Totales del Carrito</h2>
+        <div className="flex justify-between py-3 text-lg border-b border-gray-300">
+          <span className="text-gray-700">Subtotal</span>
+          {/* Formato para el subtotal */}
+          <span className="font-semibold text-gray-800">
+            {new Intl.NumberFormat("es-CO", { style: "currency", currency: "COP", minimumFractionDigits: 0 }).format(subtotal)}
+          </span>
+        </div>
+        <div className="flex justify-between py-3 text-lg border-b border-gray-300">
+          <span className="text-gray-700">Envío</span>
+          <span className="text-gray-500">Calculado al finalizar la compra</span>
+        </div>
+        <div className="flex justify-between mt-6 text-2xl font-semibold text-gray-800">
+          <span>Total</span>
+          {/* Formato para el total general */}
+          <span>
+            {new Intl.NumberFormat("es-CO", { style: "currency", currency: "COP", minimumFractionDigits: 0 }).format(subtotal)}
+          </span>
+        </div>
+        <button className="mt-6 bg-blue-600 text-white w-full py-3 rounded-lg shadow hover:bg-blue-700 transition-all">
+        Finalizar Compra
+        </button>
+      </div>
+    </div>
+  );
+};
+
+export default Cart;

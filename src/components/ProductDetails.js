@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { useCart } from "../pages/CartContext"; // Importa el contexto de carrito
-import { AiOutlineCheckCircle } from "react-icons/ai"; // Importa el icono de confirmación
-
+import { useCart } from "../pages/CartContext"; 
+import { AiOutlineCheckCircle } from "react-icons/ai"; 
 const formatCurrency = (value) => {
   return new Intl.NumberFormat("es-CO", {
     style: "currency",
@@ -105,7 +104,7 @@ const productos = [
 const ProductDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { addToCart } = useCart(); // Usa el hook del contexto de carrito
+  const { addToCart } = useCart(); 
   const [showConfirmation, setShowConfirmation] = useState(false);
 
   const product = productos.find((prod) => prod.id === id);
@@ -118,10 +117,10 @@ const ProductDetails = () => {
     addToCart(product);
     setShowConfirmation(true);
     
-    // Configura el temporizador para ocultar el anuncio después de 3 segundos
+    
     setTimeout(() => {
       setShowConfirmation(false);
-    }, 3000); // 3000 ms = 3 segundos
+    }, 3000); 
   };
 
   const handleGoToCart = () => {
@@ -147,7 +146,7 @@ const ProductDetails = () => {
           <label className="font-bold">Cantidad</label>
           <input type="number" className="border ml-2 p-1 w-16 text-center" defaultValue={1} min={1} />
           <button
-            onClick={handleAddToCart} // Añade el evento onClick para agregar al carrito
+            onClick={handleAddToCart} 
             className="ml-4 bg-blue-700 text-white px-4 py-2"
           >
             Añadir al Carro

@@ -6,7 +6,7 @@ const Cart = () => {
   const { cart, resetCart, removeFromCart, updateCartItemQuantity } = useCart();
   const subtotal = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
 
-  // Función para incrementar la cantidad de un producto
+
   const increaseQuantity = (itemId) => {
     const item = cart.find((item) => item.id === itemId);
     if (item) {
@@ -14,7 +14,7 @@ const Cart = () => {
     }
   };
 
-  // Función para disminuir la cantidad de un producto
+  
   const decreaseQuantity = (itemId) => {
     const item = cart.find((item) => item.id === itemId);
     if (item && item.quantity > 1) {
@@ -24,7 +24,7 @@ const Cart = () => {
 
   return (
     <div className="container mx-auto p-8 lg:flex lg:gap-10">
-      {/* Sección de Productos en el Carrito */}
+
       <div className="lg:w-2/3 w-full bg-white p-6 rounded-lg shadow-md border border-gray-200">
         <h2 className="text-3xl font-semibold mb-8 text-gray-800">Carro de Compras</h2>
         {cart.length > 0 ? (
@@ -46,7 +46,7 @@ const Cart = () => {
               />
               <div className="flex-1 ml-6">
                 <p className="text-lg font-medium text-gray-800">{item.name}</p>
-                {/* Formato para el precio individual */}
+                
                 <p className="text-sm text-gray-500">
                   {new Intl.NumberFormat("es-CO", { style: "currency", currency: "COP", minimumFractionDigits: 0 }).format(item.price)} 
                 </p>
@@ -66,7 +66,7 @@ const Cart = () => {
                   +
                 </button>
               </div>
-              {/* Formato para el total de cada producto en el carrito */}
+
               <div className="ml-6 font-semibold text-gray-800">
                 {new Intl.NumberFormat("es-CO", { style: "currency", currency: "COP", minimumFractionDigits: 0 }).format(item.price * item.quantity)}
               </div>
@@ -85,7 +85,6 @@ const Cart = () => {
         </div>
       </div>
 
-      {/* Sección de Totales del Carrito */}
       <div className="lg:w-1/3 w-full bg-gray-100 p-6 rounded-lg shadow-md mt-10 lg:mt-0 border border-gray-200">
         <h2 className="text-3xl font-semibold mb-6 text-gray-800">Totales del Carrito</h2>
         <div className="flex justify-between py-3 text-lg border-b border-gray-300">
@@ -101,7 +100,7 @@ const Cart = () => {
         </div>
         <div className="flex justify-between mt-6 text-2xl font-semibold text-gray-800">
           <span>Total</span>
-          {/* Formato para el total general */}
+
           <span>
             {new Intl.NumberFormat("es-CO", { style: "currency", currency: "COP", minimumFractionDigits: 0 }).format(subtotal)}
           </span>

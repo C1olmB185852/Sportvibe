@@ -11,7 +11,7 @@ const ProductsCard = ({ products }) => {
         <div
           key={product.id}
           className="bg-white shadow-lg rounded-lg overflow-hidden cursor-pointer"
-          onClick={() => navigate(`/product/${product.id}`)} // Navegar a detalles del producto
+          onClick={() => navigate(`/product/${product.id}`)} 
         >
           <img className="w-full h-72 object-cover" src={product.image} alt={product.name} />
           <div className="p-4">

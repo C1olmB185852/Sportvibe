@@ -1,16 +1,14 @@
-// App.js
 import React, { Suspense } from "react";
 import Header from "./components/Header";
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
-import { CartProvider } from "./pages/CartContext"; // Importa CartProvider para envolver la aplicación con el contexto de carrito
+import { CartProvider } from "./pages/CartContext"; 
 
-// Importamos los componentes de manera diferida para mejorar el rendimiento
 const Home = React.lazy(() => import("./pages/Home"));
 const Cart = React.lazy(() => import("./pages/Cart"));
 const ProductDetails = React.lazy(() => import("./components/ProductDetails"));
-const NotFound = () => <div>Página no encontrada</div>; // Componente simple para rutas inválidas
+const NotFound = () => <div>Página no encontrada</div>; 
 
-// Definimos el layout principal con el Header y Outlet para renderizar las rutas hijas
+
 const Layout = () => {
   return (
     <div>
@@ -20,7 +18,6 @@ const Layout = () => {
   );
 };
 
-// Definimos las rutas de la aplicación
 const router = createBrowserRouter([
   {
     path: "/",
@@ -43,7 +40,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/product/:id", // Ruta dinámica para los detalles de producto
+        path: "/product/:id", 
         element: (
           <Suspense fallback={<div>Cargando...</div>}>
             <ProductDetails />
@@ -51,17 +48,16 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "*", // Ruta de "404" para rutas que no existen
+        path: "*",
         element: <NotFound />,
       },
     ],
   },
 ]);
 
-// Componente principal App que usa RouterProvider para administrar la navegación
 function App() {
   return (
-    <CartProvider> {/* Envuelve toda la aplicación con CartProvider */}
+    <CartProvider> 
       <div className="font-bodyFont">
         <RouterProvider router={router} />
       </div>

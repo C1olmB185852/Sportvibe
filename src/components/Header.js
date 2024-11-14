@@ -1,13 +1,13 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom'; // Asegúrate de tener React Router configurado
+import { useNavigate } from 'react-router-dom'; 
 import { logoCarrito } from '../assets';
 
 const Header = () => {
     const navigate = useNavigate();
 
-    // Función para manejar el clic en el icono del carrito
+    
     const handleCartClick = () => {
-        navigate('/cart'); // Redirige a la ruta del carrito
+        navigate('/cart');
     };
 
     return (
@@ -28,7 +28,7 @@ const Header = () => {
                         className='w-7 cursor-pointer' 
                         src={logoCarrito} 
                         alt='cartImg' 
-                        onClick={handleCartClick} // Agrega el evento onClick
+                        onClick={handleCartClick} 
                     />
                 </div>
             </div>

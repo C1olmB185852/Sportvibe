@@ -68,6 +68,7 @@ const Products = () => {
         price: 120000,
         image: ChaquetaMillonarios
     },
+    
     {
         id: 11,
         name: "Chaqueta Del Santa Fe",
@@ -75,7 +76,7 @@ const Products = () => {
         image: ChaquetaSantae
     }   
   ]);
-
+  
   return (
     <div className="py-10">
       <div className="flex flex-col items-center gap-4">

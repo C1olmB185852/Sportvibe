@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { HiArrowLeft, HiArrowRight } from 'react-icons/hi';
-import { ligaEspañola, EquiposNacionales, ligaColombiana} from '../assets';
+import { ligaEspañola, EquiposNacionales, ligaColombiana } from '../assets';
+
 const Banner = () => {
     const data = [
         {
@@ -30,7 +31,7 @@ const Banner = () => {
     return (
         <div className="w-full h-auto overflow-x-hidden">
             {/* Contenedor del banner */}
-            <div className="w-screen h-[650px] relative">
+            <div className="w-screen h-[300px] sm:h-[500px] relative">
                 {/* Contenedor deslizante */}
                 <div
                     className="w-[300vw] h-full flex transition-transform duration-500"
@@ -51,15 +52,15 @@ const Banner = () => {
                 <div className="absolute w-fit left-0 right-0 mx-auto flex gap-8 bottom-[20px]">
                     <div
                         onClick={prevSlide}
-                        className="w-14 h-12 border-[1px] border-gray-700 flex items-center justify-center hover:cursor-pointer hover:bg-gray-700 hover:text-white active:bg-gray-900 duration-300"
+                        className="w-10 h-10 sm:w-14 sm:h-12 border border-gray-700 flex items-center justify-center hover:cursor-pointer hover:bg-gray-700 hover:text-white active:bg-gray-900 duration-300 rounded-full"
                     >
-                        <HiArrowLeft />
+                        <HiArrowLeft size={20} />
                     </div>
                     <div
                         onClick={nextSlide}
-                        className="w-14 h-12 border-[1px] border-gray-700 flex items-center justify-center hover:cursor-pointer hover:bg-gray-700 hover:text-white active:bg-gray-900 duration-300"
+                        className="w-10 h-10 sm:w-14 sm:h-12 border border-gray-700 flex items-center justify-center hover:cursor-pointer hover:bg-gray-700 hover:text-white active:bg-gray-900 duration-300 rounded-full"
                     >
-                        <HiArrowRight />
+                        <HiArrowRight size={20} />
                     </div>
                 </div>
             </div>

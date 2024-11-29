@@ -19,8 +19,7 @@ const Header = () => {
                 <div className='flex items-center gap-8'>
                     <ul className='flex items-center gap-8'>
                         <li className='text-black hover:text-blue-500 underline-offset-2 decoration-[2px] cursor-pointer'>Inicio</li>
-                        <li className='text-black hover:text-blue-500 underline-offset-2 decoration-[2px] cursor-pointer'>Nosotros</li>
-                        <li className='text-black hover:text-blue-500 underline-offset-2 decoration-[2px] cursor-pointer'>Soporte</li>
+                        <li className='text-black hover:text-blue-500 underline-offset-2 decoration-[2px] cursor-pointer'>Iniciar Sesion</li>
                     </ul>
                 </div>
                 <div className='relative'>
@@ -31,6 +30,7 @@ const Header = () => {
                         onClick={handleCartClick} 
                     />
                 </div>
+                
             </div>
         </div>
     );

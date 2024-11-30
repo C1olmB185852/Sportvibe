@@ -16,7 +16,6 @@ const Header = () => {
                 {/* Logo */}
                 <h1 className='text-xl sm:text-2xl text-blue-600 font-semibold'>Sportvibe</h1>
 
-                {/* Menú hamburguesa para móviles */}
                 <div className='lg:hidden'>
                     <button 
                         onClick={() => setMenuOpen(!menuOpen)}
@@ -48,7 +47,6 @@ const Header = () => {
                     </button>
                 </div>
 
-                {/* Menú para pantallas grandes */}
                 <ul className={`hidden lg:flex items-center gap-8`}>
                     <li className='text-black hover:text-blue-500 underline-offset-2 decoration-[2px] cursor-pointer'>
                         Inicio
@@ -58,7 +56,6 @@ const Header = () => {
                     </li>
                 </ul>
 
-                {/* Carrito */}
                 <div className='relative'>
                     <img
                         className='w-7 cursor-pointer'
@@ -69,7 +66,6 @@ const Header = () => {
                 </div>
             </div>
 
-            {/* Menú desplegable para móviles */}
             {menuOpen && (
                 <div className='lg:hidden bg-white border-t border-gray-800'>
                     <ul className='flex flex-col items-center py-4 space-y-4'>

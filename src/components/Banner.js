@@ -30,9 +30,7 @@ const Banner = () => {
 
     return (
         <div className="w-full h-auto overflow-x-hidden">
-            {/* Contenedor del banner */}
             <div className="w-screen h-[300px] sm:h-[500px] relative">
-                {/* Contenedor deslizante */}
                 <div
                     className="w-[300vw] h-full flex transition-transform duration-500"
                     style={{ transform: `translateX(-${currentSlide * 100}vw)` }}
@@ -48,7 +46,6 @@ const Banner = () => {
                     ))}
                 </div>
 
-                {/* Controles de navegación */}
                 <div className="absolute w-fit left-0 right-0 mx-auto flex gap-8 bottom-[20px]">
                     <div
                         onClick={prevSlide}

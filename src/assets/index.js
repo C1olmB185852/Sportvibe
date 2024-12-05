@@ -17,10 +17,15 @@ import ChaquetaSantae from "./ChaquetaSantae.jpg"
 import ligaEspañola from "./ligaEspañola.jpeg"
 import ligaColombiana from "./ligaColombiana.jpeg"
 import EquiposNacionales from "./EquiposNacionales.jpg"
+import bannerRealMadrid from "./bannerRealMadrid.jpg"
+import ligaEspañolaa from "./ligaEspañolaa.jpg"
+import ligaBetPlay from "./ligaBetPlay.jpg"
+
 
 
 
 
 
 export {LogoMetodoPago, ligaColombiana, EquiposNacionales, ligaEspañola, CamisetaNacional, CamisetaTolima, CamisetaPortugal, CamisetaPereira, CamisetaAmerica, LogoGoogle, LogoGitHub, CamisetaCali, 
-logoCarrito, iconoPagina, CamisetaRealMadrid, CamisetaBarcelona, ChaquetaColombia, ChaquetaMillonarios, ChaquetaSantae};
+logoCarrito, iconoPagina, CamisetaRealMadrid, CamisetaBarcelona, ChaquetaColombia, ChaquetaMillonarios, ChaquetaSantae, bannerRealMadrid, ligaEspañolaa,
+ligaBetPlay};

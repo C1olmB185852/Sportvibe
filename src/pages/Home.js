@@ -24,18 +24,15 @@ const Home = () => {
 
   return (
     <div className="w-full bg-gray-50">
-      {/* Banner principal */}
       <section className="w-full">
         <Banner />
       </section>
 
-      {/* Sección de Categorías */}
       <section className="w-full px-4 md:px-8 lg:px-16 mt-8">
         <h2 className="text-2xl font-bold text-gray-800 mb-4">Explora por Categorías</h2>
         <CategoriesSection categories={categories} />
       </section>
 
-      {/* Productos destacados */}
       <section className="w-full px-4 md:px-8 lg:px-16 mt-12">
         <h2 className="text-2xl font-bold text-gray-800 mb-6">Productos Destacados</h2>
         <Products products={products} />

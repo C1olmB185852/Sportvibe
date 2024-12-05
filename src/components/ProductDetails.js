@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import PropTypes from "prop-types";
 import { useCart } from "../pages/CartContext";
 import { AiOutlineCheckCircle } from "react-icons/ai";
+
 import {
   CamisetaAmerica,
   CamisetaCali,
@@ -16,13 +18,12 @@ import {
   ChaquetaSantae,
 } from "../assets";
 
-const formatCurrency = (value) => {
-  return new Intl.NumberFormat("es-CO", {
+const formatCurrency = (value) =>
+  new Intl.NumberFormat("es-CO", {
     style: "currency",
     currency: "COP",
     minimumFractionDigits: 0,
   }).format(value);
-};
 
 const productos = [
   {
@@ -123,6 +124,7 @@ const productos = [
     category: "Hombre",
     image: ChaquetaSantae,
   },
+
 ];
 
 const ProductDetails = () => {
@@ -134,111 +136,107 @@ const ProductDetails = () => {
   const product = productos.find((prod) => prod.id === id);
 
   if (!product) {
-    return <p>Producto no encontrado</p>;
+    return (
+      <div className="text-center py-16">
+        <p className="text-lg text-gray-700">Producto no encontrado.</p>
+        <button
+          onClick={() => navigate("/")}
+          className="mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
+        >
+          Volver al Inicio
+        </button>
+      </div>
+    );
   }
 
   const handleAddToCart = () => {
     addToCart(product);
     setShowConfirmation(true);
-    setTimeout(() => {
-      setShowConfirmation(false);
-    }, 3000);
+    setTimeout(() => setShowConfirmation(false), 3000);
   };
 
-  const handleGoToCart = () => {
-    navigate("/cart");
-  };
+  const handleGoToCart = () => navigate("/cart");
 
   return (
     <div className="container mx-auto px-4 py-8 flex flex-col md:flex-row gap-10">
-      <div className="w-full md:w-1/3 relative">
+      <div className="w-full md:w-1/3">
         <img
-          className="w-full h-auto object-cover rounded-lg"
+          className="w-full h-auto object-cover rounded-lg shadow-lg"
           src={product.image}
           alt={product.name}
         />
-        {product.oldPrice && (
-          <span className="absolute top-0 left-0 bg-black text-white px-2 py-1 text-sm font-semibold">
-            Sale
-          </span>
-        )}
       </div>
+
       <div className="w-full md:w-2/3">
-        <h2 className="text-2xl md:text-3xl font-bold mb-4">{product.name}</h2>
-        {product.oldPrice && (
-          <p className="text-gray-500 line-through">
-            {formatCurrency(product.oldPrice)}
-          </p>
-        )}
-        <p className="text-xl md:text-2xl font-semibold text-blue-700">
+        <h2 className="text-3xl font-bold text-gray-800 mb-4">{product.name}</h2>
+        <p className="text-xl font-semibold text-blue-700 mb-4">
           {formatCurrency(product.price)}
         </p>
-        <p className="mt-4 text-gray-600">{product.description}</p>
-        <div className="mt-4">
-          <label className="font-bold">Cantidad</label>
-          <input
-            type="number"
-            className="border ml-2 p-1 w-16 text-center"
-            defaultValue={1}
-            min={1}
-          />
+        <p className="text-gray-600 mb-4">{product.description}</p>
+        <p className="text-gray-800">
+          Categoría:{" "}
+          <span className="font-medium text-blue-600">{product.category}</span>
+        </p>
+
+        <div className="mt-6 flex items-center gap-4">
           <button
             onClick={handleAddToCart}
-            className="ml-4 bg-blue-700 text-white px-4 py-2 rounded hover:bg-blue-800 transition"
+            className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition"
           >
             Añadir al Carro
           </button>
-        </div>
-        <p className="mt-6 text-gray-700">
-          Categoría: <span className="font-semibold">{product.category}</span>
-        </p>
-      </div>
-      {showConfirmation && (
-        <div
-          className="fixed top-4 right-4 bg-white text-gray-800 border border-blue-200 rounded-lg shadow-lg p-4 z-50"
-          style={{
-            maxWidth: "300px",
-            transition: "transform 0.5s ease-in-out",
-            animation: "slideIn 0.5s forwards",
-          }}
-        >
-          <div className="flex items-center">
-            <AiOutlineCheckCircle className="text-green-500 text-2xl mr-2" />
-            <p className="font-semibold">¡Producto añadido al carrito!</p>
-          </div>
-          <p className="mt-2 text-sm text-gray-600">
-            Continúa explorando o revisa tu carrito.
-          </p>
           <button
             onClick={handleGoToCart}
-            className="mt-4 bg-blue-600 text-white px-3 py-1 rounded w-full font-semibold hover:bg-blue-700 transition-colors"
+            className="bg-gray-200 text-gray-700 px-6 py-2 rounded hover:bg-gray-300 transition"
           >
             Ver Carrito
           </button>
+        </div>
+      </div>
+
+      {showConfirmation && (
+        <div
+          className="fixed top-4 right-4 bg-white border border-blue-200 rounded-lg shadow-lg p-4 z-50 animate-slide-in"
+          role="alert"
+        >
+          <div className="flex items-center gap-2">
+            <AiOutlineCheckCircle className="text-green-500 text-2xl" />
+            <p className="text-gray-800 font-semibold">
+              ¡Producto añadido al carrito!
+            </p>
+          </div>
           <button
             onClick={() => setShowConfirmation(false)}
-            className="mt-2 bg-gray-200 text-gray-700 px-3 py-1 rounded w-full hover:bg-gray-300 transition-colors"
+            className="mt-4 bg-gray-200 text-gray-700 px-3 py-1 rounded hover:bg-gray-300 transition w-full"
           >
             Cerrar
           </button>
         </div>
       )}
+
       <style>
         {`
-          @keyframes slideIn {
+          @keyframes slide-in {
             from {
-              transform: translateX(100%);
               opacity: 0;
+              transform: translateY(-20px);
             }
             to {
-              transform: translateX(0);
               opacity: 1;
+              transform: translateY(0);
             }
+          }
+          .animate-slide-in {
+            animation: slide-in 0.3s ease-out;
           }
         `}
       </style>
     </div>
   );
+};
+
+ProductDetails.propTypes = {
+  id: PropTypes.string,
 };
 
 export default ProductDetails;

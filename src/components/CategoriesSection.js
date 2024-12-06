@@ -1,36 +1,106 @@
-const CategoriesSection = ({ categories }) => {
-  console.log(categories); // Para verificar los datos que llegan.
+import React, { useState } from "react";
+
+const CategoriesSection = ({ categories, onCategoryClick }) => {
+  // Estado para controlar el índice actual del carrusel
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  // Lógica para el botón "Anterior"
+  const handlePrevClick = () => {
+    if (currentIndex > 0) {
+      setCurrentIndex(currentIndex - 1);  // Retrocede solo si no estamos en la primera categoría
+    }
+  };
+
+  // Lógica para el botón "Siguiente"
+  const handleNextClick = () => {
+    if (currentIndex < categories.length - 1) {
+      setCurrentIndex(currentIndex + 1);  // Avanza solo si no estamos en la última categoría
+    }
+  };
+
+  // Comprobación para que los botones solo se habiliten si hay categorías
+  const areCategoriesAvailable = categories.length > 0;
 
   return (
-    <div className="overflow-x-auto">
-      <div className="flex space-x-4 px-4 py-6 lg:grid lg:grid-cols-5 lg:gap-6 lg:px-0">
-        {categories.map((category) => (
-          <div
-            key={category.id}
-            className="min-w-[150px] sm:min-w-[200px] lg:w-full bg-white shadow-lg rounded-lg overflow-hidden transform transition-transform duration-300 hover:scale-105"
-          >
-            {/* Imagen de la categoría */}
-            <div className="relative w-full h-32">
-              <img
-                src={category.image || "https://via.placeholder.com/150x100.png?text=Sin+imagen"}
-                alt={category.name}
-                className="w-full h-full object-cover"
-              />
-              {/* Overlay en la imagen */}
-              <div className="absolute inset-0 bg-black bg-opacity-20 opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
-            </div>
+    <div className="my-8 px-4 md:px-8">
 
-            {/* Texto de la categoría */}
-            <div className="p-4 text-center">
-              <h3 className="text-lg text-gray-800 font-semibold hover:text-blue-600">
-                {category.name}
-              </h3>
-            </div>
+
+      {/* Carrusel de Categorías */}
+      <div className="relative">
+        <div className="overflow-hidden">
+          {/* Contenedor de las categorías */}
+          <div
+            className="flex transition-transform duration-500 ease-in-out"
+            style={{
+              transform: `translateX(-${currentIndex * 100}%)`, // Desplaza solo una categoría a la vez
+            }}
+          >
+            {categories.map((category) => (
+              <div
+                key={category.id}
+                className="min-w-[280px] md:min-w-[320px] lg:min-w-[360px] bg-white p-6 rounded-lg shadow-lg hover:scale-105 transition-all cursor-pointer"
+                onClick={() => onCategoryClick(category.id)}
+              >
+                <img
+                  className="w-full h-48 object-cover rounded-md mb-4"
+                  src={category.image}
+                  alt={category.name}
+                />
+                <h3 className="text-xl font-semibold text-gray-800 text-center">
+                  {category.name}
+                </h3>
+              </div>
+            ))}
           </div>
-        ))}
+        </div>
+
+        {/* Botones de navegación para el carrusel */}
+        <div className="absolute top-1/2 left-0 right-0 flex justify-between transform -translate-y-1/2 px-4">
+          <button
+            className="bg-blue-600 text-white p-3 rounded-full shadow-md hover:bg-blue-700"
+            onClick={handlePrevClick}
+            disabled={currentIndex === 0 || !areCategoriesAvailable} // Deshabilita el botón si estamos en la primera categoría o no hay categorías
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M15 19l-7-7 7-7"
+              />
+            </svg>
+          </button>
+          <button
+            className="bg-blue-600 text-white p-3 rounded-full shadow-md hover:bg-blue-700"
+            onClick={handleNextClick}
+            disabled={currentIndex === categories.length - 1 || !areCategoriesAvailable} // Deshabilita el botón si estamos en la última categoría o no hay categorías
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M9 5l7 7-7 7"
+              />
+            </svg>
+          </button>
+        </div>
       </div>
     </div>
   );
 };
 
 export default CategoriesSection;
+  

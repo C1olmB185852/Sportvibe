@@ -1,68 +1,85 @@
-import React, { Suspense } from "react";
+import React, { Suspense, useMemo } from "react";
 import Header from "./components/Header";
-import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
-import { CartProvider } from "./pages/CartContext"; 
+import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
+import { CartProvider } from "./pages/CartContext";
 
+// Carga perezosa de componentes
 const Home = React.lazy(() => import("./pages/Home"));
 const Cart = React.lazy(() => import("./pages/Cart"));
 const ProductDetails = React.lazy(() => import("./components/ProductDetails"));
-const NotFound = () => <div>Página no encontrada</div>; 
+const CategoryPage = React.lazy(() => import("./pages/CategoryPage"));
+const NotFound = () => <div className="text-center p-6">Página no encontrada</div>;
 
+// Componente de fallback para Suspense
+const Loading = () => (
+  <div className="flex justify-center items-center h-screen">
+    <div className="text-lg">Cargando...</div>
+  </div>
+);
 
-const Layout = () => {
-  return (
-    <div>
-      <Header />
+const Layout = () => (
+  <div>
+    <Header />
+    <main>
       <Outlet />
-    </div>
-  );
-};
+    </main>
+  </div>
+);
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Layout />,
-    children: [
-      {
-        path: "/",
-        element: (
-          <Suspense fallback={<div>Cargando...</div>}>
-            <Home />
-          </Suspense>
-        ),
-      },
-      {
-        path: "/cart",
-        element: (
-          <Suspense fallback={<div>Cargando...</div>}>
-            <Cart />
-          </Suspense>
-        ),
-      },
-      {
-        path: "/product/:id", 
-        element: (
-          <Suspense fallback={<div>Cargando...</div>}>
-            <ProductDetails />
-          </Suspense>
-        ),
-      },
-      {
-        path: "*",
-        element: <NotFound />,
-      },
-    ],
-  },
-]);
+// Configuración de las rutas con Suspense
+const App = () => {
+  const router = useMemo(() => createBrowserRouter([
+    {
+      path: "/",
+      element: <Layout />,
+      children: [
+        {
+          path: "/",
+          element: (
+            <Suspense fallback={<Loading />}>
+              <Home />
+            </Suspense>
+          ),
+        },
+        {
+          path: "/cart",
+          element: (
+            <Suspense fallback={<Loading />}>
+              <Cart />
+            </Suspense>
+          ),
+        },
+        {
+          path: "/product/:id",
+          element: (
+            <Suspense fallback={<Loading />}>
+              <ProductDetails />
+            </Suspense>
+          ),
+        },
+        {
+          path: "/categoria/:categoryId",
+          element: (
+            <Suspense fallback={<Loading />}>
+              <CategoryPage />
+            </Suspense>
+          ),
+        },
+        {
+          path: "*",
+          element: <NotFound />,
+        },
+      ],
+    },
+  ]), []);
 
-function App() {
   return (
-    <CartProvider> 
+    <CartProvider>
       <div className="font-bodyFont">
         <RouterProvider router={router} />
       </div>
     </CartProvider>
   );
-}
+};
 
 export default App;

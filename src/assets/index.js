@@ -20,6 +20,13 @@ import EquiposNacionales from "./EquiposNacionales.jpg"
 import bannerRealMadrid from "./bannerRealMadrid.jpg"
 import ligaEspañolaa from "./ligaEspañolaa.jpg"
 import ligaBetPlay from "./ligaBetPlay.jpg"
+import LigaPremierLeague from "./LigaPremierLeague.jpg"
+import LigaAlemana from "./LigaAlemana.jpg"
+import LigaItaliana from "./LigaItaliana.jpg"
+import LigaFrancesa from "./LigaFrancesa.jpg"
+import EquiposPaises from "./EquiposPaises.jpg"
+
+
 
 
 
@@ -28,4 +35,4 @@ import ligaBetPlay from "./ligaBetPlay.jpg"
 
 export {LogoMetodoPago, ligaColombiana, EquiposNacionales, ligaEspañola, CamisetaNacional, CamisetaTolima, CamisetaPortugal, CamisetaPereira, CamisetaAmerica, LogoGoogle, LogoGitHub, CamisetaCali, 
 logoCarrito, iconoPagina, CamisetaRealMadrid, CamisetaBarcelona, ChaquetaColombia, ChaquetaMillonarios, ChaquetaSantae, bannerRealMadrid, ligaEspañolaa,
-ligaBetPlay};
+ligaBetPlay, LigaPremierLeague, LigaAlemana, LigaItaliana, LigaFrancesa, EquiposPaises};

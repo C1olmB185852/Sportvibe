@@ -1,36 +1,52 @@
 import React, { useEffect, useState } from "react";
 import Banner from "../components/Banner";
 import Products from "../components/Products";
-import CategoriesSection from "../components/CategoriesSection"; // Asumiendo que ya tienes la sección de categorías
-import { useLoaderData } from "react-router-dom";
-import categoriesData from "../pages/categoriesData"; // Importa el archivo de datos de categorías
+import CategoriesSection from "../components/CategoriesSection";
+import { useLoaderData, useNavigate } from "react-router-dom";
+import { ligaEspañolaa, ligaBetPlay, LigaPremierLeague, LigaAlemana, LigaItaliana,
+  LigaFrancesa, EquiposPaises
+} from '../assets';
+
 
 const Home = () => {
   const [products, setProducts] = useState([]);
-  const data = useLoaderData();
+  const data = useLoaderData(); // Datos simulados para productos
   const [categories, setCategories] = useState([]);
+  const navigate = useNavigate(); // Navegación a otra página
+
+  const mockCategories = [
+    { id: "Equipos Nacionales", name: "Equipos Nacionales", image: EquiposPaises },
+    { id: "Liga Betplay", name: "Liga BetPlay", image: ligaBetPlay },
+    { id: "Liga Española", name: "Liga Española", image: ligaEspañolaa },
+    { id: "Liga Premier League", name: "Liga Premier League", image: LigaPremierLeague },
+    { id: "Liga Alemana", name: "Liga Alemana", image: LigaAlemana },
+    { id: "Liga Italiana", name: "Liga Italiana", image: LigaItaliana },
+    { id: "Liga Francesa", name: "Liga Francesa", image: LigaFrancesa },
+
+  ];
 
   useEffect(() => {
-    setProducts(data);
-    setCategories(categoriesData); // Usa las categorías del archivo `categoriesData.js`
+    setProducts(data || []); // Asegúrate de que `data` no sea undefined
+    setCategories(mockCategories);
   }, [data]);
+
+  const handleCategoryClick = (categoryId) => {
+    console.log(`Categoría seleccionada: ${categoryId}`);
+    navigate(`/categoria/${categoryId}`); // Navegar a la página de categorías
+  };
 
   return (
     <div className="w-full bg-gray-50">
-      {/* Sección de banner */}
       <section className="w-full">
         <Banner />
       </section>
 
-      {/* Sección de categorías */}
       <section className="w-full px-4 md:px-8 lg:px-16 mt-8">
-        <h2 className="text-2xl font-bold text-gray-800 mb-4">Explora por Categorías</h2>
-        <CategoriesSection categories={categories} />
+        <h2 className="text-2xl font-bold text-blue-600 mb-4">Categorías</h2>
+        <CategoriesSection categories={categories} onCategoryClick={handleCategoryClick} />
       </section>
 
-      {/* Sección de productos */}
       <section className="w-full px-4 md:px-8 lg:px-16 mt-12">
-        <h2 className="text-2xl font-bold text-gray-800 mb-6">Productos Destacados</h2>
         <Products products={products} />
       </section>
     </div>

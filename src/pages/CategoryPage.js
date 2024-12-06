@@ -70,7 +70,7 @@ const CategoryPage = () => {
       id: 9,
       name: "Chaqueta De La Seleccion Colombia",
       price: 120000,
-      category: "chaquetas",
+      category: "Equipos Nacionales",
       image: ChaquetaColombia
     },
     {

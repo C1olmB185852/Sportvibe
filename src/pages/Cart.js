@@ -20,6 +20,36 @@ const Cart = () => {
     }
   };
 
+  const handleFinalizarCompra = () => {
+    const numeroWhatsApp = "573136171666";
+    const mensaje = cart
+      .map(
+        (item) =>
+          `- ${item.name} x ${item.quantity}\nPrecio: ${new Intl.NumberFormat("es-CO", {
+            style: "currency",
+            currency: "COP",
+            minimumFractionDigits: 0,
+          }).format(item.price * item.quantity)}`
+      )
+      .join("\n");
+
+    const mensajeCompleto = `Hola, quiero comprar:\n${mensaje}\n\nSubtotal: ${new Intl.NumberFormat(
+      "es-CO",
+      {
+        style: "currency",
+        currency: "COP",
+        minimumFractionDigits: 0,
+      }
+    ).format(subtotal)}`;
+
+    const enlaceWhatsApp = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(
+      mensajeCompleto
+    )}`;
+
+    // Abrir WhatsApp en una nueva pestaña
+    window.open(enlaceWhatsApp, "_blank");
+  };
+
   return (
     <div className="container mx-auto px-4 py-8 flex flex-col lg:flex-row lg:gap-10">
       {/* Lista de productos */}
@@ -124,7 +154,10 @@ const Cart = () => {
             }).format(subtotal)}
           </span>
         </div>
-        <button className="mt-6 bg-blue-600 text-white w-full py-3 rounded-lg shadow hover:bg-blue-700 transition-all">
+        <button
+          onClick={handleFinalizarCompra}
+          className="mt-6 bg-blue-600 text-white w-full py-3 rounded-lg shadow hover:bg-blue-700 transition-all"
+        >
           Finalizar Compra
         </button>
       </div>

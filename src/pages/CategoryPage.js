@@ -3,10 +3,10 @@ import { useParams } from "react-router-dom";
 import { CamisetaAmerica, CamisetaCali, CamisetaNacional, CamisetaPortugal,
   CamisetaPereira, CamisetaTolima, CamisetaRealMadrid, CamisetaBarcelona, ChaquetaColombia,
   ChaquetaMillonarios, ChaquetaSantae } from "../assets";
-import ProductsCard from "../components/ProductsCard"; // Importando el componente de las tarjetas
+import ProductsCard from "../components/ProductsCard"; 
 
 const CategoryPage = () => {
-  const { categoryId } = useParams(); // Obtener el parámetro de la URL
+  const { categoryId } = useParams();
   const [filteredProducts, setFilteredProducts] = useState([]);
 
   const products = [
@@ -89,7 +89,6 @@ const CategoryPage = () => {
     }
   ];
 
-  // Filtrar productos según la categoría en la URL
   useEffect(() => {
     const filtered = products.filter(product => product.category === categoryId);
     setFilteredProducts(filtered);
@@ -97,12 +96,10 @@ const CategoryPage = () => {
 
   return (
     <div className="py-10 px-4 md:px-8 lg:px-16">
-      {/* Título de la categoría sin fondo */}
       <h1 className="text-3xl  text-center text-blue-600 mb-8">
         Categoría: <span className="capitalize">{categoryId}</span>
       </h1>
 
-      {/* Mostrar los productos filtrados */}
       <ProductsCard products={filteredProducts} />
     </div>
   );

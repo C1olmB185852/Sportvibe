@@ -41,7 +41,7 @@ const Banner = () => {
                             className="w-screen h-full object-cover"
                             src={item.image}
                             alt={item.alt}
-                            loading={index === currentSlide ? 'eager' : 'lazy'} // Prioriza la imagen actual
+                            loading={index === currentSlide ? 'eager' : 'lazy'} 
                         />
                     ))}
                 </div>

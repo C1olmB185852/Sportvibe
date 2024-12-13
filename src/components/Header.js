@@ -8,17 +8,17 @@ const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const handleNavigateToHome = () => {
-    navigate("/"); // Redirige a la página principal
+    navigate("/"); 
   };
 
   const handleCartClick = () => {
-    navigate("/cart"); // Redirige al carrito
+    navigate("/cart"); 
   };
 
   return (
     <div className="w-full h-20 bg-white shadow-md sticky top-0 z-50">
       <div className="max-w-screen-xl h-full mx-auto px-4 flex items-center justify-between">
-        {/* Logo */}
+
         <h1
           className="text-xl sm:text-2xl text-blue-600 font-bold cursor-pointer"
           onClick={handleNavigateToHome}
@@ -26,7 +26,6 @@ const Header = () => {
           Sportvibe
         </h1>
 
-        {/* Menú desktop */}
         <ul className="hidden lg:flex items-center gap-8">
           <li
             className="flex items-center gap-2 text-black hover:text-blue-500 cursor-pointer"
@@ -37,14 +36,13 @@ const Header = () => {
           </li>
           <li
             className="flex items-center gap-2 text-black hover:text-blue-500 cursor-pointer"
-            onClick={() => navigate("/login")} // Cambiar a la ruta de iniciar sesión
+            onClick={() => navigate("/login")}
           >
             <AiOutlineLogin className="text-lg" />
             Iniciar Sesión
           </li>
         </ul>
 
-        {/* Carrito */}
         <div>
           <img
             className="w-7 cursor-pointer"
@@ -54,7 +52,6 @@ const Header = () => {
           />
         </div>
 
-        {/* Botón hamburguesa */}
         <div className="lg:hidden">
           <button
             onClick={() => setMenuOpen(!menuOpen)}
@@ -87,7 +84,6 @@ const Header = () => {
         </div>
       </div>
 
-      {/* Menú móvil */}
       {menuOpen && (
         <div className="lg:hidden bg-white border-t border-gray-200 transition-transform transform duration-300 ease-in-out">
           <ul className="flex flex-col items-center py-4 space-y-4">

@@ -1,38 +1,33 @@
 import React, { useState } from "react";
 
 const CategoriesSection = ({ categories, onCategoryClick }) => {
-  // Estado para controlar el índice actual del carrusel
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  // Lógica para el botón "Anterior"
   const handlePrevClick = () => {
     if (currentIndex > 0) {
-      setCurrentIndex(currentIndex - 1);  // Retrocede solo si no estamos en la primera categoría
+      setCurrentIndex(currentIndex - 1);  
     }
   };
 
-  // Lógica para el botón "Siguiente"
   const handleNextClick = () => {
     if (currentIndex < categories.length - 1) {
-      setCurrentIndex(currentIndex + 1);  // Avanza solo si no estamos en la última categoría
+      setCurrentIndex(currentIndex + 1);  
     }
   };
 
-  // Comprobación para que los botones solo se habiliten si hay categorías
+
   const areCategoriesAvailable = categories.length > 0;
 
   return (
     <div className="my-8 px-4 md:px-8">
 
 
-      {/* Carrusel de Categorías */}
       <div className="relative">
         <div className="overflow-hidden">
-          {/* Contenedor de las categorías */}
           <div
             className="flex transition-transform duration-500 ease-in-out"
             style={{
-              transform: `translateX(-${currentIndex * 100}%)`, // Desplaza solo una categoría a la vez
+              transform: `translateX(-${currentIndex * 100}%)`, 
             }}
           >
             {categories.map((category) => (
@@ -54,12 +49,12 @@ const CategoriesSection = ({ categories, onCategoryClick }) => {
           </div>
         </div>
 
-        {/* Botones de navegación para el carrusel */}
+
         <div className="absolute top-1/2 left-0 right-0 flex justify-between transform -translate-y-1/2 px-4">
           <button
             className="bg-blue-600 text-white p-3 rounded-full shadow-md hover:bg-blue-700"
             onClick={handlePrevClick}
-            disabled={currentIndex === 0 || !areCategoriesAvailable} // Deshabilita el botón si estamos en la primera categoría o no hay categorías
+            disabled={currentIndex === 0 || !areCategoriesAvailable} 
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -79,7 +74,7 @@ const CategoriesSection = ({ categories, onCategoryClick }) => {
           <button
             className="bg-blue-600 text-white p-3 rounded-full shadow-md hover:bg-blue-700"
             onClick={handleNextClick}
-            disabled={currentIndex === categories.length - 1 || !areCategoriesAvailable} // Deshabilita el botón si estamos en la última categoría o no hay categorías
+            disabled={currentIndex === categories.length - 1 || !areCategoriesAvailable} 
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

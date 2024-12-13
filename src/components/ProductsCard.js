@@ -12,7 +12,6 @@ const ProductsCard = ({ products }) => {
           className="bg-white shadow-md rounded-lg overflow-hidden transition-transform transform hover:scale-105 hover:shadow-xl cursor-pointer"
           onClick={() => navigate(`/product/${product.id}`)}
         >
-          {/* Imagen del producto */}
           <div className="relative">
             <img
               className="w-full h-72 object-cover"
@@ -22,7 +21,6 @@ const ProductsCard = ({ products }) => {
             <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-0 hover:opacity-60 transition-opacity duration-300"></div>
           </div>
 
-          {/* Información del producto */}
           <div className="p-4">
             <h2 className="text-gray-800 font-semibold text-lg truncate">
               {product.name}

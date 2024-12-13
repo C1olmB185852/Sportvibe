@@ -3,14 +3,12 @@ import Header from "./components/Header";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import { CartProvider } from "./pages/CartContext";
 
-// Carga perezosa de componentes
 const Home = React.lazy(() => import("./pages/Home"));
 const Cart = React.lazy(() => import("./pages/Cart"));
 const ProductDetails = React.lazy(() => import("./components/ProductDetails"));
 const CategoryPage = React.lazy(() => import("./pages/CategoryPage"));
 const NotFound = () => <div className="text-center p-6">Página no encontrada</div>;
 
-// Componente de fallback para Suspense
 const Loading = () => (
   <div className="flex justify-center items-center h-screen">
     <div className="text-lg">Cargando...</div>
@@ -26,7 +24,6 @@ const Layout = () => (
   </div>
 );
 
-// Configuración de las rutas con Suspense
 const App = () => {
   const router = useMemo(() => createBrowserRouter([
     {

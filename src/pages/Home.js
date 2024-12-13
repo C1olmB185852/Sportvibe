@@ -10,9 +10,9 @@ import { ligaEspañolaa, ligaBetPlay, LigaPremierLeague, LigaAlemana, LigaItalia
 
 const Home = () => {
   const [products, setProducts] = useState([]);
-  const data = useLoaderData(); // Datos simulados para productos
+  const data = useLoaderData(); 
   const [categories, setCategories] = useState([]);
-  const navigate = useNavigate(); // Navegación a otra página
+  const navigate = useNavigate();
 
   const mockCategories = [
     { id: "Equipos Nacionales", name: "Equipos Nacionales", image: EquiposPaises },
@@ -26,13 +26,13 @@ const Home = () => {
   ];
 
   useEffect(() => {
-    setProducts(data || []); // Asegúrate de que `data` no sea undefined
+    setProducts(data || []);
     setCategories(mockCategories);
   }, [data]);
 
   const handleCategoryClick = (categoryId) => {
     console.log(`Categoría seleccionada: ${categoryId}`);
-    navigate(`/categoria/${categoryId}`); // Navegar a la página de categorías
+    navigate(`/categoria/${categoryId}`);
   };
 
   return (

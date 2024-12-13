@@ -46,7 +46,6 @@ const Cart = () => {
       mensajeCompleto
     )}`;
 
-    // Abrir WhatsApp en una nueva pestaña
     window.open(enlaceWhatsApp, "_blank");
   };
 
@@ -125,7 +124,6 @@ const Cart = () => {
         )}
       </div>
 
-      {/* Totales */}
       <div className="lg:w-1/3 w-full bg-gray-100 p-6 rounded-lg shadow-md mt-10 lg:mt-0 border border-gray-200">
         <h2 className="text-2xl md:text-3xl font-semibold mb-6 text-gray-800">
           Totales del Carrito
